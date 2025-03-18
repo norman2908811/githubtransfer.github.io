@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Лендинг с кнопкой Download</title>
+    <style>
+        body {
+            margin: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(135deg, #001f3f, #003366); /* Темный синий фон */
+            overflow: hidden; /* Чтобы скрыть анимацию фона */
+            font-family: 'Arial', sans-serif;
+            position: relative;
+        }
+
+        .container {
+            text-align: center;
+            color: #fff; /* Цвет текста */
+            position: relative;
+            z-index: 2; /* Поместить выше фона */
+        }
+
+        .download-button {
+            padding: 20px 70px; /* Увеличение размера кнопки */
+            font-size: 28px; /* Увеличение шрифта */
+            color: #fff;
+            background: linear-gradient(90deg, #007BFF, #00bfff); /* Градиент кнопки */
+            border: none;
+            border-radius: 30px;
+            cursor: pointer;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            position: relative;
+            overflow: hidden; 
+            box-shadow: 0 4px 20px rgba(0, 123, 255, 0.5); /* Тень для кнопки */
+            transition: transform 0.3s, box-shadow 0.3s; /* Анимация нажатия */
+        }
+
+        .download-button::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 300%;
+            height: 300%;
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            transform: translate(-50%, -50%) scale(0);
+            transition: transform 0.5s;
+            z-index: 0;
+        }
+
+        .download-button:hover::before {
+            transform: translate(-50%, -50%) scale(1);
+        }
+
+        .download-button:hover {
+            box-shadow: 0 8px 30px rgba(0, 123, 255, 0.7); /* Тень при наведении */
+            transform: translateY(-4px); /* Эффект подъема кнопки */
+        }
+
+        .progress-bar {
+            width: 0;
+            height: 10px;
+            background-color: #28a745;
+            transition: width 3s ease;
+            margin-top: 20px;
+        }
+
+        .progress-container {
+            background-color: #e0e0e0;
+            border-radius: 5px;
+            overflow: hidden;
+            height: 10px;
+            width: 100%;
+            max-width: 400px;
+            margin: 20px auto;
+            display: none; /* Скрываем контейнер */
+            transition: display 0.3s ease;
+        }
+
+        /* Анимация фигур в фоне */
+        .shape {
+            position: absolute;
+            border-radius: 50%;
+            opacity: 0.5;
+            animation: move 10s infinite linear;
+        }
+
+        @keyframes move {
+            0% {
+                transform: translateY(0);
+            }
+            100% {
+                transform: translateY(-100vh);
+            }
+        }
+
+        /* Создание фигур в фоне */
+        .shape1 {
+            background: rgba(255, 255, 255, 0.3);
+            width: 100px;
+            height: 100px;
+            left: 20%;
+            animation-duration: 12s;
+        }
+
+        .shape2 {
+            background: rgba(255, 255, 255, 0.2);
+            width: 80px;
+            height: 80px;
+            left: 60%;
+            animation-duration: 15s;
+            animation-delay: 2s;
+        }
+
+        .shape3 {
+            background: rgba(255, 255, 255, 0.15);
+            width: 120px;
+            height: 120px;
+            left: 80%;
+            animation-duration: 18s;
+            animation-delay: 4s;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <button class="download-button" id="downloadBtn">Download</button>
+        <div class="progress-container" id="progressContainer">
+            <div class="progress-bar" id="progressBar"></div>
+        </div>
+    </div>
+
+    <!-- Фигуры для анимации -->
+    <div class="shape shape1"></div>
+    <div class="shape shape2"></div>
+    <div class="shape shape3"></div>
+
+    <script>
+        document.getElementById('downloadBtn').addEventListener('click', function() {
+            const progressContainer = document.getElementById('progressContainer');
+            const progressBar = document.getElementById('progressBar');
+
+            // Показываем progress bar
+            progressContainer.style.display = 'block';
+
+            // Анимация прогресс-бара
+            progressBar.style.width = '100%';
+
+            // Переход на ссылку после завершения анимации
+            setTimeout(() => {
+                window.location.href = 'https://example.com'; // Замените на вашу ссылку
+            }, 3000); // Время 3 секунды, чтобы совпадало с анимацией
+        });
+    </script>
+</body>
+</html>
